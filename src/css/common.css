@@ -16,16 +16,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 100%;
 }
 
 .button-container {
   text-align: center;
 }
 
-/* Style for the buttons */
 button {
   padding: 20px 30px;
-  margin: 400px 10px;
+  margin: 10px;
   font-size: 24px;
   color: #130a0a;
   background-color: #c4cfda;
@@ -43,6 +43,52 @@ button:disabled {
 
 button:hover:not(:disabled) {
   background-color: #bbbec4;
+}
+
+.timer-content {
+  margin-top: 10rem;
+}
+
+.timer {
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  font-size: 48px;
+}
+
+.label {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+#datetime-picker {
+  padding: 20px 30px;
+  margin: 10px;
+  font-size: 24px;
+}
+
+.error-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 p {
