@@ -1,5 +1,7 @@
 import flatpickr from 'flatpickr';
+import iziToast from 'izitoast';
 import 'flatpickr/dist/flatpickr.min.css';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const selectors = {
   dateField: document.getElementById('datetime-picker'),
@@ -23,7 +25,15 @@ flatpickr(selectors.dateField, {
     selectedDate = selectedDates[0];
     if (selectedDate) {
       if (selectedDate < currentDate()) {
-        showError('Please select a future date');
+        iziToast.show({
+          timeout: 1500,
+          close: false,
+          class: 'toast',
+          title: 'Please select the date in the future',
+          titleColor: 'white',
+          backgroundColor: 'red',
+          position: 'topCenter',
+        });
         resetTimer(timer);
       } else {
         selectors.startButton.disabled = false;
