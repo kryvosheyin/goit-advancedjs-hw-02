@@ -13,15 +13,13 @@ const selectors = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-selectors.startButton.disabled = true;
-let selectedDate;
-let timer;
-const currentDate = () => new Date();
-
-flatpickr(selectors.dateField, {
+const options = {
   enableTime: true,
-  dateFormat: 'Y-m-d H:i',
-  onChange: selectedDates => {
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    console.log(selectedDates[0]);
     selectedDate = selectedDates[0];
     if (selectedDate) {
       if (selectedDate < currentDate()) {
@@ -40,10 +38,19 @@ flatpickr(selectors.dateField, {
       }
     }
   },
-});
+};
+
+selectors.startButton.disabled = true;
+let selectedDate;
+let timer;
+const currentDate = () => new Date();
+
+flatpickr(selectors.dateField, options);
 
 selectors.startButton.addEventListener('click', event => {
   if (selectedDate) {
+    selectors.startButton.disabled = true;
+    selectors.dateField.disabled = true;
     clearInterval(timer);
     timer = setInterval(() => {
       const timeDifference = selectedDate - currentDate();
@@ -67,19 +74,9 @@ const displayTimeLeft = time => {
   selectors.seconds.textContent = seconds.toString().padStart(2, '0');
 };
 
-const showError = message => {
-  const errorElement = document.createElement('div');
-  errorElement.textContent = message;
-  errorElement.className = 'error-message';
-  document.body.appendChild(errorElement);
-
-  setTimeout(() => {
-    document.body.removeChild(errorElement);
-  }, 2000);
-};
-
 const resetTimer = () => {
   clearInterval(timer);
   selectors.timeValues.forEach(el => (el.textContent = '00'));
   selectors.startButton.disabled = true;
+  selectors.dateField.disabled = false;
 };
