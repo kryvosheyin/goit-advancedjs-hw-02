@@ -45,4 +45,5 @@ form.addEventListener('submit', event => {
       });
     timeout += delayStep;
   }
+  form.reset();
 });
